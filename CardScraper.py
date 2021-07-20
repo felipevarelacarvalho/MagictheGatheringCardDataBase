@@ -15,15 +15,21 @@ nav.find_element_by_xpath('//*[@id="ctl00_ctl00_MainContent_Content_SearchContro
 r = requests.get(nav.current_url).text
 soup = BeautifulSoup(r, 'html.parser')
 
-if soup.find_all('div', {'class':'cardContent'}):
-    print('Found you card!')
+try:
+    if soup.find_all('div', {'class':'cardContent'}):
+        print('Found you card!')
 
-else:
-    desired_card = soup.find('img', {'alt': card_name })
-    for parent in desired_card.parents:
-        if parent.name == 'a':
-            card_url = str(parent['href'])
-            card_url = card_url.replace('..', '')
-    treatred_card_url = 'https://gatherer.wizards.com/Pages' + card_url
-    print('Found it among many search results!')
-    nav.get(treatred_card_url)
+    else:
+        desired_card = soup.find('img', {'alt': card_name })
+        
+        for parent in desired_card.parents:
+            if parent.name == 'a':
+                card_url = str(parent['href'])
+                card_url = card_url.replace('..', '')
+                
+        treatred_card_url = 'https://gatherer.wizards.com/Pages' + card_url
+        print('Found it among many search results!')
+        nav.get(treatred_card_url)
+except AttributeError:
+    print('Name written incorrectly or this card doesn\'t exist!\n-------\nClosing browser.')
+    nav.quit()
