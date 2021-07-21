@@ -1,15 +1,16 @@
 """
-    File name: interpolationGPS.py
-    Author: Felipe Varela Carvalho
-    Date created: 5/24/2021
-    Date last modified: 6/25/2021
+    File name: CraperRequest.py
+    Author: Dumith Bou-Habib
+    Date created: 07/20/2021
+    Date last modified: 07/21/2021
     Python Version: 3.9.5
-    Description: Script to interpolate data from file
+    Description: Script to scrape mtg cards info
 """
 import requests
 from bs4 import BeautifulSoup
 
-
+lables = ['Card Name', 'Converted Mana Cost', 'Mana Cost', 'Types', 'P/T', 'Card Text', 'Rarity', 'Expansion']
+values = []
 
 card_name = input('$ Name your card: ')
 card_name = card_name.title()
@@ -42,5 +43,5 @@ except AttributeError:
 
 
 soup = BeautifulSoup(r, 'html.parser')
-for div in soup.find_all('div', {'class':'cardtextbox'}):
+for div in soup.find_all('div', {'class':'value'}):
     print(div.text)
