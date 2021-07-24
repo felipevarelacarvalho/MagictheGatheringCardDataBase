@@ -44,4 +44,9 @@ except AttributeError:
 
 soup = BeautifulSoup(r, 'html.parser')
 for div in soup.find_all('div', {'class':'value'}):
-    print(div.text)
+    dados_da_carta = div.text
+    dados_da_carta = dados_da_carta.strip()
+    values.append(dados_da_carta)
+
+ 
+print(values)
