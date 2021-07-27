@@ -9,7 +9,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-lables = ['Card Name', 'Converted Mana Cost', 'Mana Cost', 'Types', 'P/T', 'Card Text', 'Rarity', 'Expansion']
+lables = ['Community Rating','Card Name', 'Mana Cost', 'Converted Mana Cost', 'Types', 'Card Text', 'Flavor Text', 'P/T', 'Expansion', 'Rarity', 'Something', 'Artist']
 values = []
 
 card_name = input('$ Name your card: ')
@@ -48,5 +48,5 @@ for div in soup.find_all('div', {'class':'value'}):
     dados_da_carta = dados_da_carta.strip()
     values.append(dados_da_carta)
 
- 
-print(values)
+for i in values:
+    print(i)
